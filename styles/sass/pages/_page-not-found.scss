@@ -1,0 +1,17 @@
+.page-not-found {
+    height: 100vh;
+    background-color: $primary;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $white;
+    text-align: center;
+    h3 {
+        font-size: 4em;
+        font-weight: $font-weight-bold;
+    }
+    h6 {
+        font-size: 1.5em;
+        font-weight: $font-weight-bold;
+    }
+}

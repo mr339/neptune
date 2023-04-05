@@ -1,0 +1,26 @@
+.login_form {
+    margin-left: 50px;
+    padding: 50px;
+    box-shadow: $box-shadow;
+    border-radius: $border-radius;
+    flex-grow: 1;
+}
+
+.btn_social {
+    outline: 0 !important;
+    border: 0 !important;
+    &.google {
+        padding: 3px 7px;
+        background-color: #f4f4f4;
+        border-radius: 100%;
+        margin-right: 10px;
+    }
+    &.facebook {
+        color: #4268b2;
+        font-size: 25px;
+    }
+}
+
+.covert_Icon {
+    font-size: 20px;
+}

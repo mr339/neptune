@@ -1,0 +1,115 @@
+// Required
+@import '../../../node_modules/bootstrap/scss/functions';
+
+// Default variable overrides
+//Variables goes here
+$white: #fff !default;
+$black: #000;
+
+//fonts
+$font-family-base: 'Inter', sans-serif;
+
+//Brand Colors
+$primary: #4550e6;
+$secondary: #5d6778;
+$info: #5b99ea;
+$success: #5cb377;
+$warning: #eebf41;
+$danger: #d26d69;
+$light: $white;
+$dark: #252930;
+
+// Prefix for :root CSS variables
+$variable-prefix: ek-;
+$prefix: $variable-prefix;
+
+// Required
+@import '../../../node_modules/bootstrap/scss/variables';
+@import '../../../node_modules/bootstrap/scss/mixins';
+
+////Variables for theme goes here
+:root.darken {
+  /* redefine theme colors for dark theme */
+  $primary: #335eec;
+  $secondary: #b902b9;
+  $success: #008817;
+  $warning: #b98500 !default;
+  $danger: #b90000 !default;
+  $dark: $white;
+  $light: $black;
+  $body-color: #d4d4d4;
+  $body-bg: #121519;
+
+  $theme-colors: (
+    'primary': $primary,
+    'secondary': $secondary,
+    'success': $success,
+    'info': $info,
+    'warning': $warning,
+    'danger': $danger,
+    'dark': $dark,
+    'light': $light,
+    'body-color': $body-color,
+    'body-bg': $body-bg,
+  );
+  --#{$variable-prefix}body-color: #{$body-color};
+  --#{$variable-prefix}body-bg: #{$body-bg};
+
+  /* redefine theme color variables */
+  @each $color, $value in $theme-colors {
+    --#{$variable-prefix}#{$color}: #{$value};
+  }
+  @each $color, $value in $theme-colors {
+    --#{$variable-prefix}bg-#{$color}: #{$value};
+  }
+
+  /* redefine theme color rgb vars (used for bg- colors) */
+  $theme-colors-rgb: map-loop($theme-colors, to-rgb, '$value');
+  @each $color, $value in $theme-colors-rgb {
+    --#{$variable-prefix}#{$color}-rgb: #{$value};
+  }
+  @each $color, $value in $theme-colors {
+    .btn-#{$color} {
+      @include button-variant($value, $value);
+    }
+  }
+
+  @each $color, $value in $theme-colors {
+    .btn-outline-#{$color} {
+      @include button-outline-variant($value);
+    }
+  }
+  .navbar-nav {
+    --ek-navbar-hover-color: #fff;
+    --ek-nav-link-color: var(--ek-body-color);
+    --ek-nav-link-hover-color: var(--ek-navbar-hover-color);
+  }
+  .offcanvas,
+  .offcanvas-xxl,
+  .offcanvas-xl,
+  .offcanvas-lg,
+  .offcanvas-md,
+  .offcanvas-sm {
+    --ek-offcanvas-bg: var(--ek-body-bg);
+  }
+}
+
+$nav-link-color: $primary;
+
+$nav-link-hover-color: darken($primary, 10%);
+// color for the card
+$card-bg: var(--#{$variable-prefix}body-bg);
+$card-color: var(--#{$variable-prefix}body-color);
+//color for box shadow
+$box-shadow: 0 0.5rem 1rem rgba(var(--#{$variable-prefix}dark-rgb), 0.15);
+$box-shadow-sm: 0 0.125rem 0.25rem
+  rgba(var(--#{$variable-prefix}dark-rgb), 0.075);
+$box-shadow-lg: 0 1rem 3rem rgba(var(--#{$variable-prefix}dark-rgb), 0.175);
+$box-shadow-inset: inset 0 1px 2px
+  rgba(var(--#{$variable-prefix}dark-rgb), 0.075);
+
+
+// Form
+$input-group-addon-bg: $white;
+$input-focus-box-shadow: none;
+$input-focus-border-color: #ced4da;
