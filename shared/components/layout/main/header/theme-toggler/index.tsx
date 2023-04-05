@@ -1,8 +1,15 @@
 import { useTheme } from 'next-themes';
+import { useEffect } from 'react';
 
 
 const ThemeToggler = () => {
   const { theme, setTheme } = useTheme();
+  useEffect(() => {
+    const theme = window.localStorage.getItem('theme');
+    if (theme === 'darken') {
+      window.localStorage.setItem('theme', 'light');
+    }
+  }, [theme]);
   //You can concatenate or just give one styles such as shown below
   return (
     <>

@@ -3,11 +3,10 @@ import { logo } from 'imageConfig';
 import getConfig from 'next/config';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { ChangeEvent, useCallback, useState } from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { currencySchema } from 'schemas/converter';
-
 //REACT ICONS
 import { FaMoneyBillAlt } from 'react-icons/fa';
 import { SiConvertio } from 'react-icons/si';
@@ -20,31 +19,30 @@ import styles from './converter.module.scss';
 
 const ConverterComponent = () => {
   const { publicRuntimeConfig } = getConfig();
-  const router = useRouter();
   const rate = 3; // setting the example rate;
 
-  const [nepValue, setNepValue] = useState<any>();
-  const [busdValue, setBusdValue] = useState<any>();
+  const [nepAmount, setNepAmount] = useState<string>('');
+  const [busdAmount, setBusdAmount] = useState<string>('');
 
-  const handleNepValueChange = (event: any) => {
-    const nepValue = event.target.value;
-    setNepValue(nepValue);
+  const handleNepAmountChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    const nepAmount = event.target.value;
+    setNepAmount(nepAmount);
     if (Object.keys(errors).length === 0) {
-      setBusdValue(calculateConversion(nepValue, 'nep-to-busd', rate)); // convert NEP to BUSD
+      setBusdAmount(calculateConversion(nepAmount, 'nep-to-busd', rate)); // convert NEP to BUSD
     }
-  };
+  }, []);
 
-  const handleBusdValueChange = (event: any) => {
-    const busdValue = event.target.value;
-    setBusdValue(busdValue);
+  const handleBusdAmountChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    const busdAmount = event.target.value;
+    setBusdAmount(busdAmount);
     if (Object.keys(errors).length === 0) {
-      setNepValue(calculateConversion(busdValue, 'busd-to-nep', rate)); // convert BUSD to NEP
+      setNepAmount(calculateConversion(busdAmount, 'busd-to-nep', rate)); // convert BUSD to NEP
     }
-  };
+  }, []);
 
   const {
     register,
-    formState: { errors, isValid },
+    formState: { isValid, errors },
   } = useForm({
     mode: 'onChange',
     reValidateMode: 'onChange',
@@ -57,8 +55,6 @@ const ConverterComponent = () => {
     setIsLoading(true);
 
   };
-  //EFFECTS
-
   return (
     <>
       {isLoading ?
@@ -67,7 +63,7 @@ const ConverterComponent = () => {
         <div className="w-60 mx-auto">
           <div className="d-flex align-items-center">
             <div className="w-50 text-center">
-              <Image alt="Image" src={logo} height={500} width={300} />
+              <Image alt="Image" src={logo} height={500} width={300} className="logo_class" />
             </div>
             <div className={styles.login_form}>
               <h3>Crypto Converter</h3>
@@ -90,9 +86,9 @@ const ConverterComponent = () => {
                       type="text"
                       aria-describedby="basic-addon1"
                       className="border-start-0 ps-0 fs-sm"
-                      value={nepValue}
-                      onChange={(e) => {
-                        handleNepValueChange(e);
+                      value={nepAmount}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        handleNepAmountChange(e);
                         register('nep').onChange(e);
                       }}
                     />
@@ -122,10 +118,10 @@ const ConverterComponent = () => {
                       aria-label="text"
                       aria-describedby="basic-addon1"
                       className="border-start-0 ps-0 fs-sm"
-                      value={busdValue}
-                      onChange={(e) => {
-                        handleBusdValueChange(e);
-                        register('nep').onChange(e);
+                      value={busdAmount}
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        handleBusdAmountChange(e);
+                        register('busd').onChange(e);
                       }}
                     />
                     {errors?.busd && (

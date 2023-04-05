@@ -51,6 +51,10 @@ body {
   .sun::after {
     filter: invert(1);
   }
+
+  .logo_class{
+    filter: invert(1)
+}
 }
 
 // input:-webkit-autofill {
