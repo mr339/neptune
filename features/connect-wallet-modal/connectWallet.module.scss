@@ -1,0 +1,63 @@
+.button_wrapper{
+    display: flex;
+    justify-content: space-between;
+}
+
+.error_exlamation {
+    margin-bottom: 1rem;
+}
+
+.cross_delete {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 9;
+    padding: 10px;
+    cursor: pointer;
+    &:hover{
+      transform: scale(1.5);
+    }
+  }
+
+.wallet_prompt{
+    color: #E9A19B;
+}
+
+.connect_btn {
+    background: #4D88CC;
+}
+
+.close_btn{
+    background: #EAEDF2;
+    color: #363943 !important;
+    border:none;
+    &:hover{
+        background:#bdc1c9;
+    }
+}
+
+
+.disconnect_btn{
+    background: #A63F37;
+    color: #ffffff !important;
+    &:hover{
+        background:#e55246;
+    }
+}
+
+.table_wallet th,
+.table_wallet td {
+    border-bottom: solid 1px #dee2e6;
+    padding: 15px 0;
+    font-size: 15px;
+}
+
+.wallet_detail p {
+    color: #80827F;
+    font-size: 13px;
+}
+
+.table_td{
+    font-size: 12px !important;
+    color: #7B7B83;
+}

@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 type Props = {
   btnLabel: string;
   className?: string;
-  btnFunction?: () => void | null;
+  btnFunction?: (data: any) => Promise<void> | null;
   variant?: string;
   type: any;
   isLoading?: boolean;

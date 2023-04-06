@@ -3,14 +3,30 @@
     "target": "es5",
     "baseUrl": "./",
     "paths": {
-      "@features/*": ["features/*"],
-      "@pages/*": ["pages/*"],
-      "@shared/*": ["shared/*"],
-      "@store/*": ["store/*"],
-      "@public/*": ["public/*"],
-      "@styles/*": ["styles/*"]
+      "@features/*": [
+        "features/*"
+      ],
+      "@pages/*": [
+        "pages/*"
+      ],
+      "@shared/*": [
+        "shared/*"
+      ],
+      "@store/*": [
+        "store/*"
+      ],
+      "@public/*": [
+        "public/*"
+      ],
+      "@styles/*": [
+        "styles/*"
+      ]
     },
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -31,5 +47,7 @@
     "features/cms/components/layout/main/index.tss",
     "features/cms/components/layout/main/index.tss"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

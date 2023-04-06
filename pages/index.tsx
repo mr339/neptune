@@ -3,12 +3,12 @@ import { NextPageWithLayout } from '@pages/_app';
 import MainLayout from '@shared/components/layout/main';
 import React from 'react';
 
-const Login: NextPageWithLayout = () => {
+const Converter: NextPageWithLayout = () => {
   return <ConverterComponent />;
 };
 
-export default Login;
+export default Converter;
 
-Login.getLayout = (page: React.ReactElement) => {
+Converter.getLayout = (page: React.ReactElement) => {
   return <MainLayout>{page}</MainLayout>;
 };
