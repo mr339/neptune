@@ -1,84 +1,158 @@
-## Frontend NextJS BaseCode
+Please follow the following steps to clone and setup all prerequisites:
 
-## Getting Started
+- ## Prerequisites
 
-First, run the development server:
+1. **Nodejs**
 
-```bash
-npm install
-# or
-yarn install
+Make sure to have the [Node.js](https://nodejs.org/en/) installed & running on your machine. If you already have installed Node on your computer, you can skip this step if your existing node version is greater than equal to 16.
 
-npm run dev
-# or
-yarn dev
+2. **Yarn**
+
+Followed by yarn which is necessary to install, update or delete the needed node packages for the specific projects.
+
+3. **React/Nextjs**
+
+As this codebase uses the Next Js framework, proper understanding and prior knowledge of _ **React** _ basics and fundamentals are required and also NextJs' routing and server components. For better understanding of React and NextJs we suggest you to once go through official documentation of React from [ReactJS.org](https://reactjs.org/docs/getting-started.html) along with NextJs from [NextJS.org](https://nextjs.org/).
+
+
+# Getting Started
+
+## Step 1: Clone the Base code repository
+Clone Repository
+```js
+ git clone git@github.com:mr339/neptune.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-## Installing Story Book(if needed)
-
-```bash
-
-npx sb init
-npm run storybook
-# or
-yarn run storybook
-
+## Step 2: Checkout to branch
+Fetch the latest branch
+```js
+ git fetch origin neptune
+```
+Checkout to latest branch
+```js
+ git checkout neptune
 ```
 
-## Setting environment variable for client side
+## Step 4: Install packages
+Run the following command
+```js
+ yarn install
+```
+## Step 5: Run app for development
+```js
+ yarn run dev
+```
+Runs the app in the development Open http://127.0.0.1:3000 and IF port 3000 is unavailable, please check your terminal to see in which port the app is running and redirect likewise.
 
-Add publicRuntimeConfig in your next.config.js:
 
-```bash
- publicRuntimeConfig: {
-   testenv_var: process.env.testenv_var
- }
+## Naming Convention
+
+### For declaring variables we will be using camelCase variable names throughout the project like
+
+```js
+const handleLoginSubmit = () => {};
 ```
 
-Then on your JS file you can access it as such:
+### And for creating a folder we use dash in between the words with all small letters like: <br/>user-profile
 
-```bash
-import getConfig from 'next/config';
-const { publicRuntimeConfig } = getConfig();
-publicRuntimeConfig.testenv_var;
-```
+# utils
 
-Finally, add that variable into your .env.local file and restart the server.
+Any utilities should be made under shared/utils. If name of util is xyz:
+- The folder is named xyz-utils and file inside that folder should is named xyz.util.ts
+ (**Note**: The folder name has a dash and file name has dot in the name with the folder name being plural(utils) and file name being singular(util))
+ 
+# Security headers
+ 
+All the security header options are set in 'next.config.js' file. The one's being used currently are: 
 
-## Merge request/ Pull request steps that the requester should follow
+### X-Frame-Options
+   This header indicates whether the site should be allowed to be displayed within an iframe. This can prevent against clickjacking      
+   attacks.
 
-```bash
-1. The title should be in the format
-   <work-item-id>-<work-item-type>: title of the work item
-   For Example: 1875-feature: Edit summary page
-2. The description should describe the work in that pull request with proper context
-3. The people assigned to review the code should be added as reviewers.
-4. The work item to which the current pull request is associated should be included.
+### X-Content-Type-Options
+   This header prevents the browser from attempting to guess the type of content if the Content-Type header is not explicitly set. This 
+   can prevent XSS exploits for websites that allow users to upload and share files.The only valid value for this header is nosniff.
 
-```
+### Referrer-Policy
+   This header controls how much information the browser includes when navigating from the current website (origin) to another. You can 
+   read about the different options [here](https://scotthelme.co.uk/a-new-security-header-referrer-policy/). The options currently being 
+   used is 'strict-origin'.
 
-## Packages used:
+### Permissions-Policy
+   This header allows you to control which features and APIs can be used in the browser.For example, if your CMS web app does not need to 
+   access the camera or microphone of the device, you can set the camera and microphone permissions to none. If your CMS web app requires 
+   access to certain sensors or media content, you can set the corresponding permissions to self.
 
-1. Styling
+### Content-Security-Policy
+   This header helps prevent cross-site scripting (XSS), clickjacking and other code injection attacks. Content Security Policy (CSP) can 
+   specify allowed origins for content including scripts, stylesheets, images, fonts, objects, media (audio, video), iframes, and more.
 
-- [React Bootstrap](https://react-bootstrap.netlify.app/)
-- [SASS](https://sass-lang.com/documentation/)
+You can read about the many different CSP options [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP).
 
-2. Forms
+# Code commenting
 
-- [react-hook-form](https://react-hook-form.com/)
-- [yup](https://www.npmjs.com/package/yup)
-- [@hookform/resolvers](https://www.npmjs.com/package/@hookform/resolvers)
+Here are some simple rules that must be followed while writing comments on your codebase.For more detailed information, these links
+can be followed:
 
-3. Toast Message
+- [JSDoc](https://www.section.io/engineering-education/jsdoc-documentation/)
+- [Coding standards](https://developer.wordpress.org/coding-standards/inline-documentation-standards/javascript/#formatting-guidelines)
 
-- [react-toastify](https://www.npmjs.com/package/react-toastify)
+  Inline comments inside methods and functions should be formatted as follows:
 
-4. Cookie
-   #cookies related to authentication is handled in axios interceptors
+  ## Single line comments
 
-- [cookies-next](https://www.npmjs.com/package/cookies-next)
+  They should begin with doule forward slashes
+
+  ```js
+  // Extract the array values.
+  ```
+
+  ## Multi-line comments
+
+  ```js
+  /*
+   * This is a comment that is long enough to warrant being stretched over
+   * the span of multiple lines. You'll notice this follows basically
+   * the same format as the JSDoc wrapping and comment block style.
+   */
+  ```
+
+  Important note: Multi-line comments must not begin with /\*_ (double asterisk). Use /_ (single asterisk) instead.
+
+  ## Documentation comment
+
+  These types of comments are signified by using double asterisk after single forward slash i.e /\*\* .The double asterisk is used to
+  indicate that the comment contains special information, such as the types of parameters and return values of a function.
+
+  ```js
+  /**
+   * This is a documentation comment
+   *
+   * This function takes in two parameters, a number and a callback function
+   * The function will square the number, and then pass the result to the callback
+   *
+   * @param {number} num - The number to be squared
+   * @param {function} callback - The function to be called with the squared result
+   * @returns {number} - The result of the square operation
+   */
+  function squareAndCall(num, callback) {
+    const squaredNum = num * num;
+    callback(squaredNum);
+    return squaredNum;
+  }
+  ```
+
+  ## Aligning comments
+
+  Related comments should be spaced so that they align to make them more easily readable.
+
+  ```js
+  /**
+   * @param {very_long_type} name           Description.
+   * @param {type}           very_long_name Description.
+   */
+  ```
+
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
