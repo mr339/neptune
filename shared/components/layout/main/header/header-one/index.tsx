@@ -7,9 +7,6 @@ import Logo from './logo';
 import NavItems from './nav';
 
 const HeaderOne = () => {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   //You can concatenate or just give one styles such as shown below
   return (
     <Navbar

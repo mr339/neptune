@@ -5,8 +5,10 @@ import styles from "./connectWallet.module.scss";
 import { useEffect, useState } from "react";
 import { walletInjecter } from "../../components/wallet";
 import { useWeb3React } from "@web3-react/core";
-import Web3 from 'web3'
+import Web3 from 'web3';
 import { GoThreeBars } from "react-icons/go";
+import { showToast, Types } from '@shared/utils/toast-utils/toast.util';
+
 
 const ConnectWallet = ({ show, setShow }: any) => {
 
@@ -25,8 +27,8 @@ const ConnectWallet = ({ show, setShow }: any) => {
                 const balanceInWei = await library.eth.getBalance(account);
                 const balanceInBNB = Web3.utils.fromWei(balanceInWei, 'ether');
                 setBalance(balanceInBNB);
-            } catch (error) {
-                console.error(error);
+            } catch (err) {
+                showToast(Types.error, 'Something went wrong' + err);
             }
         };
 
@@ -36,8 +38,8 @@ const ConnectWallet = ({ show, setShow }: any) => {
                 try {
                     await activate(walletInjecter);
                     localStorage.setItem('isWalletConnected', 'true');
-                } catch (error) {
-                    console.error(error);
+                } catch (err) {
+                    showToast(Types.error, 'Something went wrong' + err);
                 }
             }
         };
@@ -51,9 +53,10 @@ const ConnectWallet = ({ show, setShow }: any) => {
         try {
             await activate(walletInjecter);
             localStorage.setItem('isWalletConnected', 'true');
+            showToast(Types.success, 'Wallet connected!');
             setShowWallet(false);
         } catch (err) {
-            console.log(err)
+            showToast(Types.error, 'Something went wrong' + err);
         }
     };
 
@@ -61,9 +64,10 @@ const ConnectWallet = ({ show, setShow }: any) => {
         try {
             deactivate()
             localStorage.setItem('isWalletConnected', 'false');
+            showToast(Types.error, 'Wallet disconnected!');
             setShowWallet(true);
         } catch (err) {
-            console.log(err)
+            showToast(Types.error, 'Something went wrong' + err);
         }
     };
 
@@ -127,11 +131,11 @@ const ConnectWallet = ({ show, setShow }: any) => {
                                                 </tr>
                                                 <tr>
                                                     <td>Chain ID</td>
-                                                    <td className="text-end">{chainId ? chainId : ''}</td>
+                                                    <td className="text-end">{chainId || ''}</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Balance</td>
-                                                    <td className="text-end"><GoThreeBars />{balance ? balance : ''}</td>
+                                                    <td className="text-end"><div className={styles.balance}><GoThreeBars />{balance || ''}</div></td>
                                                 </tr>
                                             </tbody>
                                         </table>

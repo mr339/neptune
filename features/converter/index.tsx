@@ -19,14 +19,17 @@ const ConverterComponent = () => {
   const [busdAmount, setBusdAmount] = useState<string>('');
   const [showModal, setShowModal] = useState<boolean>(false);
 
+
   const {
     register,
     formState: { errors },
+    reset,
   } = useForm({
     mode: 'onChange',
     reValidateMode: 'onChange',
     resolver: yupResolver(currencySchema),
   });
+
 
   const handleNepAmountChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
     const nepAmount = event.target.value;
@@ -44,8 +47,13 @@ const ConverterComponent = () => {
     }
   }, []);
 
+  const clearValues = async () => {  // resetting values
+    setBusdAmount('');
+    setNepAmount('');
+  }
+
   const checkWalletConnection = async () => {
-    setShowModal(true)
+    setShowModal(true);
   };
 
 
@@ -57,7 +65,7 @@ const ConverterComponent = () => {
           <div className="w-50 text-center">
             <Image alt="Image" src={logo} height={500} width={300} className="logo_class" />
           </div>
-          <div className={styles.login_form}>
+          <div className={styles.converter_form}>
             <h3>Crypto Converter</h3>
             <hr />
             <Form
@@ -92,7 +100,7 @@ const ConverterComponent = () => {
                 </InputGroup>
               </Form.Group>
 
-              <div className={`${styles.covert_Icon} mb-3`}>
+              <div className={`${styles.covert_Icon} mb-3 text-center`}>
                 <SiConvertio />
               </div>
 
@@ -124,9 +132,12 @@ const ConverterComponent = () => {
                 </InputGroup>
               </Form.Group>
 
-              <Form.Group className="my-4" controlId="convertValue">
-                1 NEP equals {rate} BUSD
-              </Form.Group>
+              <div className={`${styles.middle_info} my-4`}>
+                <Form.Group controlId="convertValue">
+                  1 NEP equals {rate} BUSD
+                </Form.Group>
+                <p className={styles.clear_form} onClick={clearValues}>Clear form</p>
+              </div>
               <PrimaryButton
                 type="button"
                 btnLabel="Check Wallet Details"
