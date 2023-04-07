@@ -20,6 +20,7 @@ As this codebase uses the Next Js framework, proper understanding and prior know
 ## Step 1: Clone the Base code repository
 Clone Repository
 ```js
+ git clone git@github.com:mr339/neptune.git
 ```
 
 ## Step 2: Checkout to branch
