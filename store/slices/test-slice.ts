@@ -34,7 +34,7 @@ const metaSlice = createSlice({
             state.isLoading = true;
         });
         builder.addCase(getMetaDescription.fulfilled, (state, action) => {
-            state.metaDescription = action.payload[0];
+            state.metaDescription = action.payload;
             state.isLoading = false;
         });
         builder.addCase(getMetaDescription.rejected, (state, action) => {

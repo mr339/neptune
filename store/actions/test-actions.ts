@@ -6,7 +6,7 @@ export const getMetaDescription = createAsyncThunk(
   async () => {
     try {
       const response = await axios.get(
-        'https://jsonplaceholder.typicode.com/albums/1/photos'
+        'https://jsonplaceholder.typicode.com/todos/'
       );
       if (response.status === 200) {
         return response.data;
