@@ -13,7 +13,7 @@ const Footer = () => {
             </p>
             <ul className="list-unstyled d-flex">
               <li className="ms-4">
-                <Link href="https://twitter.com/neptunemutual?lang=en" target="_blank">
+                <Link href="" target="_blank">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="30"
